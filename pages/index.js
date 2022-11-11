@@ -69,3 +69,14 @@ export default function Home() {
     </div>
   )
 }
+
+export async function getServerSideProps() {
+  const result = await fetch(`${apiLocal}/api/trending`);
+   const json = await result.json();
+  
+  return {
+    props: {
+      list: json.list
+    } 
+  };
+}  

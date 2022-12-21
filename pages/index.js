@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-//import { apiLocal } from '../lib'
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -22,13 +21,3 @@ export default function Home() {
   )
 }
 
-// export async function getServerSideProps() {
-//   const result = await fetch(`${apiLocal}/api/hello`);
-//    const json = await result.json();
-  
-//   return {
-//     props: {
-//       list: json.list
-//     } 
-//   };
-// }  

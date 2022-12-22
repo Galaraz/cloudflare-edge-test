@@ -7,7 +7,7 @@ import Link from 'next/link';
 // import Skeleton from '../components/Skeleton';
 
 //import styles from '../styles/Home.module.css'
-import Place from '../img/place.svg';
+// import Place from '../img/place.svg';
 import { descriptionDefault, urlImgs, urlSite, moneyFormatter, titleSite, urlFavicon } from '../utils';
 //import { AuthContext } from '../context';
 

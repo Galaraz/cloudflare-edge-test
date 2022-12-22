@@ -90,7 +90,7 @@ for (let i = 0; i < 4; i++) {
 
                     <div className="row">
                         
-                        {/* { destaques.map(dest => (
+                        { destaques.map(dest => (
                             
                             <div key={dest.id} className="col-12 col-md-6 col-xl-3 py-3 py-xl-0">
                                 <Link href={`/imovel/${dest.id}`} className="d-flex flex-column shadow h-100 item-grid" > 
@@ -129,7 +129,7 @@ for (let i = 0; i < 4; i++) {
                                 </Link>
                             </div>
 
-                        )) } */}
+                        )) }
 
                     </div>
                 </div>

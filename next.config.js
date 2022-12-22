@@ -5,12 +5,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: false,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'static-dev.infoimoveis.com.br',
-      },
-    ],
+    disableStaticImages: true
   },
 
 }

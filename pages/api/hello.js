@@ -1,9 +1,5 @@
 
 
-export const config = {
-  runtime: "experimental-edge",
-};
-
 export default async function hello (req) {
   
   return new Response(JSON.stringify({ name: "John Doe" }), {

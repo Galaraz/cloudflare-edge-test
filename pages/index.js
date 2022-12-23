@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 //import ContentHeader from '../components/ContentHeaderMain';
 // import Skeleton from '../components/Skeleton';
 
 //import styles from '../styles/Home.module.css'
-// import Place from '../img/place.svg';
-import { descriptionDefault, urlImgs, urlSite, moneyFormatter, titleSite, urlFavicon } from '../utils';
+import Place from '../img/place.svg';
+import {  urlImgs, urlSite, moneyFormatter, titleSite } from '../utils';
 //import { AuthContext } from '../context';
 
 export default function Home(props) {
@@ -34,42 +34,10 @@ for (let i = 0; i < 4; i++) {
   return (
     <>
       <Head>
-        <link rel="apple-touch-icon" sizes="57x57" href={ `${urlFavicon}apple-icon-57x57.png`} />
-        <link rel="apple-touch-icon" sizes="60x60" href={ `${urlFavicon}apple-icon-60x60.png`} />
-        <link rel="apple-touch-icon" sizes="72x72" href={ `${urlFavicon}apple-icon-72x72.png`} />
-        <link rel="apple-touch-icon" sizes="76x76" href={ `${urlFavicon}apple-icon-76x76.png`} />
-        <link rel="apple-touch-icon" sizes="114x114" href={ `${urlFavicon}apple-icon-114x114.png`} />
-        <link rel="apple-touch-icon" sizes="120x120" href={ `${urlFavicon}apple-icon-120x120.png`} />
-        <link rel="apple-touch-icon" sizes="144x144" href={ `${urlFavicon}apple-icon-144x144.png`} />
-        <link rel="apple-touch-icon" sizes="152x152" href={ `${urlFavicon}apple-icon-152x152.png`} />
-        <link rel="apple-touch-icon" sizes="180x180" href={ `${urlFavicon}apple-icon-180x180.png`} />
-        <link rel="icon" type="image/png" sizes="192x192"  href={ `${urlFavicon}android-icon-192x192.png`} />
-        <link rel="icon" type="image/png" sizes="32x32" href={ `${urlFavicon}favicon-32x32.png`} />
-        <link rel="icon" type="image/png" sizes="96x96" href={ `${urlFavicon}favicon-96x96.png`} />
-        <link rel="icon" type="image/png" sizes="16x16" href={ `${urlFavicon}favicon-16x16.png`} />
-        <link rel="manifest" href={ `${urlFavicon}manifest.json`} />
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content={ `${urlFavicon}ms-icon-144x144.png`} />
-        <meta name="theme-color" content="#ffffff" />
-
+    
         {/* <!-- Primary Meta Tags --> */}
         <title>{titleSite}</title>
-        <meta name="title" content={titleSite} />
-        <meta name="description" content={descriptionDefault} />
-
-        {/* <!-- Open Graph / Facebook --> */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={urlSite} />
-        <meta property="og:title" content={titleSite} />
-        <meta property="og:description" content={descriptionDefault} />
-        <meta property="og:image" content={`${urlFavicon}padrao.png`} />
-
-        {/* <!-- Twitter --> */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={urlSite} />
-        <meta property="twitter:title" content={titleSite} />
-        <meta property="twitter:description" content={descriptionDefault} />
-        <meta property="twitter:image" content={`${urlFavicon}padrao.png`} />
+       
       </Head>
 
 
@@ -90,11 +58,11 @@ for (let i = 0; i < 4; i++) {
 
                     <div className="row">
                         
-                        { destaques.map(dest => (
+                        {/* { destaques.map(dest => (
                             
                             <div key={dest.id} className="col-12 col-md-6 col-xl-3 py-3 py-xl-0">
                                 <Link href={`/imovel/${dest.id}`} className="d-flex flex-column shadow h-100 item-grid" > 
-                                <a>                               
+                                                          
                                     <div className="foto position-relative"><Image src={`${urlImgs}/${dest.imagem}`}width={300} height={50}  alt={dest.tipo} /></div>
                                     <div className="d-flex flex-grow-1 flex-column px-3 py-3">
                                         
@@ -125,11 +93,11 @@ for (let i = 0; i < 4; i++) {
                                         </div>
                                         
                                     </div>
-                                    </a>                                
+                                                         
                                 </Link>
                             </div>
 
-                        )) }
+                        )) } */}
 
                     </div>
                 </div>
@@ -143,10 +111,11 @@ for (let i = 0; i < 4; i++) {
                
                     <div className="row">
 
+                    
                         { noticias.map(noti => (
                             <div key={noti.id} className="col-12 col-md-6 col-xl-3 py-3 py-xl-0">
 
-                                <Link href={`/noticia/${noti.id}`} className="d-flex flex-column shadow h-100 item-grid-noticia">
+                                {/* <Link href={`/noticia/${noti.id}`} className="d-flex flex-column shadow h-100 item-grid-noticia"> */}
                                                                
                                     <div className="foto"><Image src={`${urlImgs}/${noti.imagem}`}width={300} height={50} alt={noti.titulo} /></div>
                                     <div className="d-flex flex-grow-1 flex-column px-3 py-3">                                            
@@ -155,7 +124,7 @@ for (let i = 0; i < 4; i++) {
                                         <div className="ler-mais color-primary"><span className="line-height-100 font-14">LER MATÉRIA COMPLETA</span></div>
                                     </div>
                                                                
-                                </Link>
+                                {/* </Link> */}
 
                             </div>
                         )) }
@@ -172,10 +141,28 @@ for (let i = 0; i < 4; i++) {
 
 
 export async function getServerSideProps() {
- 
-  const resposta = await fetch(urlSite+"/api/home")
-  const list = await resposta.json()
-     
+
+    const apiId = "992";
+    const apiUrl = "https://dev.infoimoveis.com.br/webservice/hotsites.php";
+
+    const corpo = await JSON.stringify( {
+        acoes: [                        
+          { metodo: "destaques", params: [ { resultados: "4" }] },
+          { metodo: "ultimasnoticias", params: [ { resultados: "4" }] },
+        ], id: apiId
+      });
+    
+    const response =  await fetch(
+        apiUrl,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: corpo
+        }
+    
+    );
+    const list = await response.json()
+    
   return {
     props: list, 
   }

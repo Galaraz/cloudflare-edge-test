@@ -108,7 +108,7 @@ export default function Header(props) {
             <div className="container d-flex flex-column flex-md-row align-items-center pt-1  pt-md-0 pb-md-0">
             
                 <div className="logo pt-4 pb-3 pt-lg-0 pb-lg-0">
-                    <Link href="/"><Image src={Logo} alt="Imobiliaria Test" /></Link>
+                    <Link href="/"><Image src={Logo} width="100" height="100"alt="Imobiliaria Test" /></Link>
                 </div>
 
                 <button onClick={() => handleOpenMenu()} className={`${isOpen ? 'open ': ''}d-block d-md-none btn-menu primary border-0 font-16 m-3`}>MENU<div><span></span></div></button>

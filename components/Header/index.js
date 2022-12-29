@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import {  scrollTopDist, headerFixed, urlImgs } from '../../utils';
 
-import Logo from '../../public/img/logo.png';
+const Logo = 'https://raw.githubusercontent.com/Galaraz/cloudflare-edge-test/main/public/img/logo.png';
 import SemFoto from '../../public/img/sm-perfil.png';
 import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';

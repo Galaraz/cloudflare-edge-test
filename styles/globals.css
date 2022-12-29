@@ -213,7 +213,7 @@ img { display: block;width: 100%;height: auto; }
 
 .item-destaque { border-radius: 4px;overflow: hidden; }
 
-.content-header-primary { position: relative;background: url('../public/img/img-destaque-home.jpg') no-repeat center center;background-size: cover !important;background-color: #ddd;z-index: 100; height: 400px; }       
+.content-header-primary { position: relative;background: url('https://raw.githubusercontent.com/Galaraz/cloudflare-edge-test/main/public/img/img-destaque-home.jpg') no-repeat center center;background-size: cover !important;background-color: #ddd;z-index: 100; height: 400px; }       
 .content-header-primary .container.cardbusca  { position: relative;min-height: var(--content-primary-header-height);  }
               
 .content-header-primary .container h1 { position: relative;z-index: 2; }

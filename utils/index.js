@@ -1,7 +1,3 @@
-//import axios from 'axios';
-
-// import { toast } from 'react-toastify';
-
 const apiId = "992";
 const apiUrl = "https://dev.infoimoveis.com.br/webservice/hotsites.php";
 const urlImgs = "https://static-dev.infoimoveis.com.br"; 
@@ -176,6 +172,15 @@ function verificarCreci(creci){
     }
     return '';
  }
+ const normalizeSrc = src => {
+    return src.startsWith('/') ? src.slice(1) : src;
+};
+
+const cloudflareLoader = ({ src, width, quality }) => {
+    return `https://static-dev.infoimoveis.com.br/${normalizeSrc(src)}`;
+};
+
+
  
 export { 
     apiUrl,     
@@ -187,7 +192,8 @@ export {
     existsOrError,     
     IsEmail, 
     isMobile, 
-    notify, 
+    notify,
+    cloudflareLoader,
     titleSite, 
     itensPorPagina,    
     defaulTheme,
@@ -203,3 +209,5 @@ export {
     urlFacebook,
     urlInstagram
 }
+
+

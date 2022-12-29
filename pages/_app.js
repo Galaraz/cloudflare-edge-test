@@ -1,7 +1,15 @@
 import '../styles/globals.css'
+import AuthProvider from '../context';
 import 'bootstrap/dist/css/bootstrap.min.css';
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import Header from '../components/Header';
 
-export default MyApp
+export const runtime = 'experimental-edge';
+
+export default function App({ Component, pageProps }) {
+  return (
+    <AuthProvider>
+      <Header/>
+      <Component {...pageProps} />
+    </AuthProvider>
+  )
+}

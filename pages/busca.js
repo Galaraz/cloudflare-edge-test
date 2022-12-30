@@ -28,7 +28,6 @@ export default function Busca(props){
                 <meta name="msapplication-TileColor" content="#ffffff" />
                 <meta name="msapplication-TileImage" content={ `${urlFavicon}ms-icon-144x144.png` } />
                 <meta name="theme-color" content="#ffffff" />
-
                 <meta name="description" content={descriptionDefault} />
                 <meta name="og:site_name" property="og:site_name" content={titleSite} />
                 <meta name="og:title" property="og:title" content={`Resultado da Busca | ${titleSite}`} />
@@ -39,6 +38,7 @@ export default function Busca(props){
                 <meta name="og:image:height" property="og:image:height" content="300" />
                 <title>Resultado da Busca | { titleSite }</title>
             </Head>
+
             <ListImoveis busca={busca} />
         </>
     )
@@ -72,7 +72,7 @@ export async function getServerSideProps(context){
     
     );
     const list = await response.json()
-    console.log(list)
+    
     return { 
         props: { list }
     }

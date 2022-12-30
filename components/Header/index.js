@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 // import { NavLink, Link } from 'react-router-dom';
 
-import {  scrollTopDist, headerFixed, urlImgs } from '../../utils';
+import {  scrollTopDist, headerFixed, urlImgs, loaderImage } from '../../utils';
 
-const Logo = 'https://raw.githubusercontent.com/Galaraz/cloudflare-edge-test/main/public/img/logo.png';
+// const Logo = '../../public/img/logo.png';
 import SemFoto from '../../public/img/sm-perfil.png';
 import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
@@ -108,7 +108,7 @@ export default function Header(props) {
             <div className="container d-flex flex-column flex-md-row align-items-center pt-1  pt-md-0 pb-md-0">
             
                 <div className="logo pt-4 pb-3 pt-lg-0 pb-lg-0">
-                    <Link href="/"><Image src={Logo} width="100" height="100"alt="Imobiliaria Test" /></Link>
+                    <Link href="/"><Image loader={loaderImage} src={'img/logo.png'} width="100" height="100"alt="Imobiliaria Test" /></Link>
                 </div>
 
                 <button onClick={() => handleOpenMenu()} className={`${isOpen ? 'open ': ''}d-block d-md-none btn-menu primary border-0 font-16 m-3`}>MENU<div><span></span></div></button>
@@ -161,7 +161,7 @@ export default function Header(props) {
                 <div className="d-flex justify-content-between container py-2">
                     
                     <div className="d-flex align-items-center logo">
-                        <Link href="/"> <Image src={Logo} alt="lojatest - Corretora de Imóvies" /> </Link>
+                        <Link href="/"> <Image loader={loaderImage} src={'img/logo.png'} alt="lojatest - Corretora de Imóvies" width="100" height="100"/> </Link>
                     </div>
 
                     <button onClick={() => handleOpenMenu()} className={`${isOpen ? 'open ': ''}d-block d-md-none btn-menu border-0 font-16`}>MENU<div><span></span></div></button>

@@ -13,7 +13,7 @@ const headerFixed = true;
 const scrollTopDist = 200;
 const gaId = '';
 const reloadTime = 5000;
-
+const hostName = "https://cloudflare-edge-test-9sz.pages.dev/" 
 
 
 const defaulTheme = {    
@@ -180,6 +180,9 @@ const cloudflareLoader = ({ src, width, quality }) => {
     return `https://static-dev.infoimoveis.com.br/${normalizeSrc(src)}`;
 };
 
+const loaderImage = ({ src, width, quality }) => {
+    return `${hostName}${normalizeSrc(src)}`;
+};
 
  
 export { 
@@ -194,6 +197,7 @@ export {
     isMobile, 
     notify,
     cloudflareLoader,
+    loaderImage,
     titleSite, 
     itensPorPagina,    
     defaulTheme,

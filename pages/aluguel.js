@@ -24,7 +24,6 @@ export default function aluguel(props) {
                 <meta name="msapplication-TileColor" content="#ffffff" />
                 <meta name="msapplication-TileImage" content={ `${urlFavicon}ms-icon-144x144.png` } />
                 <meta name="theme-color" content="#ffffff" />
-
                 <meta name="description" content={descriptionDefault} />
                 <meta name="og:site_name" property="og:site_name" content={titleSite} />
                 <meta name="og:title" property="og:title" content={`Resultado da Busca | ${titleSite}`} />

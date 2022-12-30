@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import  Link  from 'next/link';
 import Image from 'next/image';
-import  Head from 'next/head';
 import { AuthContext } from '../../context';
 import { Range } from 'react-range';
 import Select from 'react-select';
@@ -17,34 +16,23 @@ import CardBusca from '../cardBusca';
 
 export default function ListImoveis(props) {    
     const router = useRouter();
-    const { finalidadePagina } = props
+    const { finalidadePagina, busca } = props
+    const {imoveis, total_registros} = busca
     const {finalidades,tipoimoveis,estados,valores, setValores} = useContext(AuthContext);
     const queryInicial = router.query;
     const [ formulario, setFormulario ] = useState(queryInicial);  
     const arrayFinalidades = finalidades.map(item => {return { value: item, label:item}})     
-    const [ totalImoveis, setTotalImoveis ] = useState();
-    const [ listaImoveis, setImoveis ] = useState([]);
-    const [ pagina, setPagina ] = useState(0);
-    const [ loading, setLoading ] = useState(true);  
     const [ loadingDados, setLoadingDados ] = useState(true);    
     const [ cidades, setCidades ] = useState([]);        
     const [ bairro, setBairro ] = useState([]); 
+    let entrouNaPagina = false;
 
     useEffect(()=>{
-        if(finalidadePagina){
-            getDados({...queryInicial, ...{ finalidade : finalidadePagina || ''}})
-            mudarDadosFormulario({finalidade : finalidadePagina})
-        }else{
-            getDados(queryInicial)
-        }
+        if(finalidadePagina) setFormulario({...formulario, ...{finalidade: finalidadePagina}})
         if(queryInicial.uf) getCidade(queryInicial.uf)
         if(queryInicial.cidade) getBairro(queryInicial.cidade)
         if(!queryInicial.uf && !queryInicial.cidade) setLoadingDados(false)
     },[]);
-
-    useEffect(() => {
-        handleRequisicao()
-    },[pagina])
 
     function mudarDadosFormulario(dados){
      setFormulario({...formulario, ...dados});
@@ -56,14 +44,8 @@ export default function ListImoveis(props) {
     }, [formulario]);
 
     function handleRequisicao(){
-        router.push({
-            pathname:"/busca",
-            query: {...formulario,...{pg: pagina}},
-        })
-
         if (formulario.uf) getCidade(formulario.uf);
         if (formulario.cidade) getBairro(formulario.cidade);       
-        getDados({...formulario,...{pg: pagina}});
         handleScroll()
     }
    
@@ -129,52 +111,18 @@ export default function ListImoveis(props) {
     }
 
     async function handleSubmit() {
-        setLoading(true);
         router.push({
             pathname: '/busca',
-            query: {...formulario,...{pg: pagina}},
+            query: {...formulario},
         })
-
-        getDados({...formulario,...{pg: pagina}});
-        
     }
     
-    async function getDados({ ...search }) {
-        setLoading(true);
-        let auxSearch = {...search}
-        if(auxSearch.finalidade) auxSearch.finalidade = auxSearch.finalidade == "Venda"? 2:1;
-        const corpo = JSON.stringify( {
-            acoes: [  
-                
-                { 
-                    metodo: "busca", 
-                    params: [ 
-                        {                             
-                            resultados: 12,
-                            ...auxSearch
-                        }]
-                }
-            ], id: apiId
-        });
-        
-        const response =  await fetch(
-            apiUrl,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: corpo
-            }
-        
-        );
-        const list = await response.json()
-        setTotalImoveis(list.busca.total_registros);
-        setImoveis(list.busca.total_registros ? list.busca.imoveis : []);
-        setTimeout(() => {setLoading(false)}, 100);
-      
-    }
+   
 
     let renderSkeletonList = [];
     for (let i = 0; i < itensPorPagina; i++) { renderSkeletonList[i] = i; }
+
+    console.log(queryInicial)
 
     return (
 
@@ -194,17 +142,17 @@ export default function ListImoveis(props) {
                         cidades={cidades}
                         bairro={bairro}
                         valores={valores}
-                        loading={loading}
+                        
                         handleOptionChange={(tipo, value) => handleOptionChange(tipo,value)}
                         mudarDadosFormulario={(e) => mudarDadosFormulario(e)}
                         handleSubmit={() => handleSubmit()}
                     />
 
-                    { listaImoveis.length > 0 ?  (
+                    { imoveis?.length > 0 ?  (
                         <>
                         <header className= "d-flex topo-grid justify-content-between align-items-md-center flex-column flex-md-row pt-2 pt-md-5">
                             <div className="d-none d-md-block font-14 font-md-18 qtde pr-5">
-                                <b className="pr-2">{totalImoveis > 1 ? `${totalImoveis} imóveis` : `${totalImoveis} imóvel` }</b>                                                               
+                                <b className="pr-2">{total_registros > 1 ? `${total_registros} imóveis` : `${total_registros} imóvel` }</b>                                                               
                             </div>
                             <div>  
                                 {/* <Select className="select filtro" classNamePrefix="react-select" defaultInputValue={filtrado ? filtrado : ''} onChange={(e) => handleOrdenacao(e.value)} name="" placeholder="FILTRAR" options={filtros} />                                 */}
@@ -212,7 +160,7 @@ export default function ListImoveis(props) {
                         </header>
                         <div className="row pt-2 pb-5">
                             
-                            {  listaImoveis.map(imovel => {
+                            {  imoveis.map(imovel => {
                                 return (
                                     <div key={imovel.id} className="col-12 col-md-6 col-xl-3 py-4">
                                         <Link href={`/imovel/${imovel.id}`} className="d-flex flex-column shadow h-100 item-grid">
@@ -263,24 +211,26 @@ export default function ListImoveis(props) {
 
                         </div>
 
-                        { totalImoveis > itensPorPagina && (
+                        { total_registros > itensPorPagina && (
                             <div className="d-flex justify-content-center pt-2 pb-5 pagination-container">
                                 <Paginate                                     
                                     hideFirstLastPages={true}
-                                    activePage={pagina ? pagina : 1}
+                                    activePage={queryInicial.pg ? queryInicial.pg : 1}
                                     itemsCountPerPage={itensPorPagina}
-                                    totalItemsCount={totalImoveis}
+                                    totalItemsCount={total_registros}
                                     pageRangeDisplayed={5}
-                                    onChange={e => setPagina(e)}
+                                    onChange={e => {
+                                        router.push({
+                                            pathname:"/busca",
+                                            query: {...formulario,...{pg: e}},
+                                        })
+                                    }}
                                 /> 
                             </div> 
                         ) }
 
                         </>                     
-                    ) :(
-                        loading ?
-                           <div className="text-center py-5 my-5 font-32 opacity-50 "></div>
-                       : 
+                    ) :( 
                             <div className="text-center py-5 my-5 font-32 opacity-50">Nenhum imóvel encontrado</div> 
                                      
                    )}                                        

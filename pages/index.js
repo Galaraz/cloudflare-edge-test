@@ -1,16 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
-import Image from 'next/image'
 
-// import { cloudflareLoader } from '../utils'
-import { AuthContext } from "../context"
-import { apiUrl, apiId, urlImgs, moneyFormatter, cloudflareLoader, titleSite, urlFavicon, descriptionDefault, urlSite } from '../utils';
-import Link from 'next/link';
-import Place from '../public/img/place.svg';
-import ContentHeader from '../components/ContentHeaderMain';
+import {  titleSite, urlFavicon, descriptionDefault, urlSite } from '../utils';
+
+
 
 export default function Home(props) {
-  const { destaques , ultimasnoticias } = props
+ 
   const isOpen = false
   return (
     <>
@@ -55,7 +51,7 @@ export default function Home(props) {
 
       <div className={`${isOpen ? 'open ': ''}main`}>
                       
-          <ContentHeader/>
+      
 
           <div className="container py-4 px-4 px-sm-0">
           <div  className="d-none d-md-block  ">
